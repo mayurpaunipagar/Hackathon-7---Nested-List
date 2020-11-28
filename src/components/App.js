@@ -155,7 +155,38 @@ const states = [
 ];
 
 function App() {
-  return <div id="main"></div>;
+  const [city, setCity] = useState(false);
+  const [town, setTown] = useState(false);
+  const toggleCities = (event) => {
+    const toggle = !city;
+    setCity(toggle);
+  }
+  const toggleTowns = () => {
+    const toggle = !town;
+    setTown(toggle);
+  }
+  return (<div id="main">
+    <ol>
+      {states.map((mystate, index) => (
+        <li id={"state" + (index + 1)} onClick={toggleCities} style={{ cursor: 'pointer' }}>
+          {mystate.name}
+          <ol>
+            {mystate.cities.map((mycity, indexCity) => (
+              (city)?(<li id={"city" + (indexCity + 1)} onClick={toggleTowns} style={{ cursor: 'pointer' }}>
+                {mycity.name}
+                <ol>
+                  {mycity.towns.map((mytown,indexTown)=>(
+                    (town)?(<li id={"town" + (indexTown + 1)}>{mytown.name}</li>):("")
+                  ))}
+                </ol>
+              </li>):("")
+            ))}
+          </ol>
+        </li>
+      ))}
+    </ol>
+
+  </div>);
 }
 
 export default App;
