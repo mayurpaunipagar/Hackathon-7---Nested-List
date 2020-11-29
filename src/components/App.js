@@ -155,15 +155,15 @@ const states = [
 ];
 
 function App() {
-  const [city, setCity] = useState(false);
-  const [town, setTown] = useState(false);
+  const [stateId, setStateId] = useState("");
+  const [cityId, setCityId] = useState("");
   const toggleCities = (event) => {
-    const toggle = !city;
-    setCity(toggle);
+    setStateId(event.target.id);
+    console.log(event.target.id);
+    
   }
-  const toggleTowns = () => {
-    const toggle = !town;
-    setTown(toggle);
+  const toggleTowns = (event) => {
+    setCityId(event.target.id);
   }
   return (<div id="main">
     <ol>
@@ -172,11 +172,11 @@ function App() {
           {mystate.name}
           <ol>
             {mystate.cities.map((mycity, indexCity) => (
-              (city)?(<li id={"city" + (indexCity + 1)} onClick={toggleTowns} style={{ cursor: 'pointer' }}>
+              (stateId===("state"+(index+1)))?(<li id={"city" + (indexCity + 1)} onClick={toggleTowns} style={{ cursor: 'pointer' }}>
                 {mycity.name}
                 <ol>
                   {mycity.towns.map((mytown,indexTown)=>(
-                    (town)?(<li id={"town" + (indexTown + 1)}>{mytown.name}</li>):("")
+                    (cityId===("city"+(indexCity+1)))?(<li id={"town" + (indexTown + 1)}>{mytown.name}</li>):("")
                   ))}
                 </ol>
               </li>):("")
