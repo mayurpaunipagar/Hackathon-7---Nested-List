@@ -8,9 +8,9 @@ export default class State extends React.Component {
         this.state = { cityVisible: false };
         this.toggleCity = this.toggleCity.bind(this);
     }
-    toggleCity() {
+    toggleCity(e) {
         this.setState({ cityVisible: !this.state.cityVisible })
-
+        e.preventDefault();
     }
     render() {
 
@@ -22,7 +22,7 @@ export default class State extends React.Component {
                 {(this.state.cityVisible) ?
                     (<ol>
                         {cities.map((city) => (
-                            <City name={city.name} />
+                            <City name={city.name} towns={city.towns} />
                         ))}
                     </ol>) : ""}
             </li>
