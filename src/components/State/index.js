@@ -13,20 +13,19 @@ export default class State extends React.Component {
 
     }
     render() {
-        
+
         const cities = this.props.cities;
 
         return <>
             <li onClick={this.toggleCity}>
                 {this.props.name}
-                <ol>
-                    {cities.map((x) => (
-                        <City name={x.name} />
-                    ))}
-                </ol>
+                {(this.state.cityVisible) ?
+                    (<ol>
+                        {cities.map((city) => (
+                            <City name={city.name} />
+                        ))}
+                    </ol>) : ""}
             </li>
-
-            {(this.state.cityVisible) ? "yes" : ""}
         </>
     }
 }
