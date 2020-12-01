@@ -1,5 +1,6 @@
 import React, { Component, useState } from "react";
 import "./../styles/App.css";
+import State from "./State";
 
 // Do not alter the states const and values inside it.
 const states = [
@@ -154,39 +155,17 @@ const states = [
   },
 ];
 
-function App() {
-  const [stateId, setStateId] = useState("");
-  const [cityId, setCityId] = useState("");
-  const toggleCities = (event) => {
-    setStateId(event.target.id);
-    console.log(event.target.id);
-    
-  }
-  const toggleTowns = (event) => {
-    setCityId(event.target.id);
-  }
-  return (<div id="main">
-    <ol>
-      {states.map((mystate, index) => (
-        <li id={"state" + (index + 1)} onClick={toggleCities} style={{ cursor: 'pointer' }}>
-          {mystate.name}
-          <ol>
-            {mystate.cities.map((mycity, indexCity) => (
-              (stateId===("state"+(index+1)))?(<li id={"city" + (indexCity + 1)} onClick={toggleTowns} style={{ cursor: 'pointer' }}>
-                {mycity.name}
-                <ol>
-                  {mycity.towns.map((mytown,indexTown)=>(
-                    (cityId===("city"+(indexCity+1)))?(<li id={"town" + (indexTown + 1)}>{mytown.name}</li>):("")
-                  ))}
-                </ol>
-              </li>):("")
-            ))}
-          </ol>
-        </li>
-      ))}
-    </ol>
+export default class App extends React.Component {
 
-  </div>);
+  
+  render() {
+    return (
+      <ol>
+        {states.map((state) => (
+          
+          <State name={state.name} cities={state.cities} />
+        ))}
+      </ol>
+    );
+  }
 }
-
-export default App;
